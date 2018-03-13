@@ -5,10 +5,14 @@
  */
 package dao;
 
+import domain.User;
+
 /**
  *
  * @author M
  */
 public interface IUser {
-    
+    User getUser();
+
+    Boolean setUser();
 }
