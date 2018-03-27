@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
-
-import domain.User;
+package interfaces;
 
 /**
  *
  * @author M
  */
-public interface IUser {
-    User getUser();
-
-    Boolean setUser();
+public interface IMovement {
+    
 }

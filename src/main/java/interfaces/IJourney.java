@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package interfaces;
+
+import java.util.List;
 
 /**
  *
  * @author M
  */
-public interface IVehicle {
-    
+public interface IJourney {
+    List<ITransLocation> getTransLocations();
 }

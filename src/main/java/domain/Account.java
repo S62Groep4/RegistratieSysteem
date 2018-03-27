@@ -16,7 +16,7 @@ import javax.persistence.Id;
  */
 @Entity
 @Model
-public class User implements Serializable{
+public class Account implements Serializable{
 
     @Id
     private Long id;
@@ -24,11 +24,11 @@ public class User implements Serializable{
     private String email = null;
     private String password = null;
     
-    public User(){
+    public Account(){
         
     }
     
-    public User(String name, String email, String password){
+    public Account(String name, String email, String password){
         this.name = name;
         this.email = email;
         this.password = password;
