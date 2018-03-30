@@ -5,10 +5,15 @@
  */
 package interfaces;
 
+import java.util.Date;
+
 /**
  *
  * @author M
  */
 public interface ILatLng {
-    
+    Double getLat();
+    Double getLongValue();
+    Date getTime();
+    String getProvincie();
 }
