@@ -28,8 +28,8 @@ public class Vehicle implements IVehicle, Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String licensePlate = null;
-    private final List<IJourney> journeys = new ArrayList();
-    private final List<ISubInvoice> subInvoices = new ArrayList();
+    private List<IJourney> journeys = new ArrayList();
+    private List<ISubInvoice> subInvoices = new ArrayList();
     
     public Vehicle(){
         
@@ -48,10 +48,18 @@ public class Vehicle implements IVehicle, Serializable{
     public List<IJourney> getJourneys() {
         return this.journeys;
     }
+    
+    public void setJourneys(List<IJourney> journeys){
+        this.journeys = journeys;
+    }
 
     @Override
     public List<ISubInvoice> getSubInvoices() {
         return this.subInvoices;
+    }
+    
+    public void setSubInvoices(List<ISubInvoice> subInvoices){
+        this.subInvoices = subInvoices;
     }
     
     public void setHashedLicensePlate(String licensePlate){

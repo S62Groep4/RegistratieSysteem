@@ -5,12 +5,20 @@
  */
 package domain;
 
+import interfaces.IJourney;
+import interfaces.ISubInvoice;
+import interfaces.ITransLocation;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import testgenerator.Journey;
+import testgenerator.SubInvoice;
+import testgenerator.TransLocation;
 
 /**
  *
@@ -37,9 +45,96 @@ public class VehicleTest {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    /**
+     * Test of getHashedLicensePlate method, of class Vehicle.
+     */
+    @Test
+    public void testGetHashedLicensePlate() {
+        System.out.println("getHashedLicensePlate");
+        Vehicle instance = new Vehicle();
+        instance.setHashedLicensePlate("111");
+        String expResult = "111";
+        String result = instance.getHashedLicensePlate();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getJourneys method, of class Vehicle.
+     */
+    @Test
+    public void testGetJourneys() {
+        System.out.println("getJourneys");
+        Vehicle instance = new Vehicle();
+        
+        List<ITransLocation> locations = new ArrayList();
+        locations.add(new TransLocation(10.2, 11.11, "11-04-2018", "1111231", "Deutschland"));
+        IJourney journey = new Journey(locations);
+        
+        List<IJourney> journeys = new ArrayList();
+        journeys.add(journey);
+        
+        instance.setJourneys(journeys);
+        
+        List<IJourney> expResult = journeys;
+        List<IJourney> result = instance.getJourneys();
+        assertEquals(expResult.size(), result.size());
+    }
+
+    /**
+     * Test of getSubInvoices method, of class Vehicle.
+     */
+    @Test
+    public void testGetSubInvoices() {
+        System.out.println("getSubInvoices");
+        Vehicle instance = new Vehicle();
+        
+        ISubInvoice subinvoice = new SubInvoice("123123", "Deutschland", Boolean.TRUE, "11-04-2018", 10.22);
+        List<ISubInvoice> subinvoices = new ArrayList();
+        subinvoices.add(subinvoice);
+        
+        instance.setSubInvoices(subinvoices);
+        
+        List<ISubInvoice> expResult = subinvoices;
+        List<ISubInvoice> result = instance.getSubInvoices();
+        assertEquals(expResult.size(), result.size());
+        
+    }
+
+    /**
+     * Test of setHashedLicensePlate method, of class Vehicle.
+     */
+    @Test
+    public void testSetHashedLicensePlate() {
+        System.out.println("setHashedLicensePlate");
+        String licensePlate = "";
+        Vehicle instance = new Vehicle();
+        instance.setHashedLicensePlate(licensePlate);
+        assertNotNull(instance.getHashedLicensePlate());
+    }
+
+    /**
+     * Test of setId method, of class Vehicle.
+     */
+    @Test
+    public void testSetId() {
+        System.out.println("setId");
+        Long id = 1L;
+        Vehicle instance = new Vehicle();
+        instance.setId(id);
+        assertNotNull(instance.getId());
+    }
+
+    /**
+     * Test of getId method, of class Vehicle.
+     */
+    @Test
+    public void testGetId() {
+        System.out.println("getId");
+        Vehicle instance = new Vehicle();
+        instance.setId(1L);
+        Long expResult = 1L;
+        Long result = instance.getId();
+        assertEquals(expResult, result);
+    }
+    
 }
