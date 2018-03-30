@@ -9,9 +9,12 @@ import interfaces.IJourney;
 import interfaces.ISubInvoice;
 import interfaces.IVehicle;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.inject.Model;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -22,10 +25,11 @@ import javax.persistence.Id;
 @Model
 public class Vehicle implements IVehicle, Serializable{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String licensePlate = null;
-    private List<IJourney> journeys = null;
-    private List<ISubInvoice> subInvoices = null;
+    private final List<IJourney> journeys = new ArrayList();
+    private final List<ISubInvoice> subInvoices = new ArrayList();
     
     public Vehicle(){
         
@@ -33,8 +37,6 @@ public class Vehicle implements IVehicle, Serializable{
     
     public Vehicle(String licensePlate, List<IJourney> journeys, List<ISubInvoice> subInvoices){
         this.licensePlate = licensePlate;
-        this.journeys = journeys;
-        this.subInvoices = subInvoices;
     }
 
     @Override
@@ -54,14 +56,13 @@ public class Vehicle implements IVehicle, Serializable{
     
     public void setHashedLicensePlate(String licensePlate){
         this.licensePlate = licensePlate;
+    }    
+    
+    public void setId(Long id){
+        this.id = id;
     }
     
-    public void setJourneys(List<IJourney> journeys){
-        this.journeys = journeys;
+    public Long getId(){
+        return this.id;
     }
-    
-    public void setSubInvoices(List<ISubInvoice> subInvoices){
-        this.subInvoices = subInvoices;
-    }
-    
 }

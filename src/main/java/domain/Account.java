@@ -8,6 +8,8 @@ package domain;
 import java.io.Serializable;
 import javax.enterprise.inject.Model;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -19,6 +21,7 @@ import javax.persistence.Id;
 public class Account implements Serializable{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name = null;
     private String email = null;
