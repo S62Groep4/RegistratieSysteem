@@ -16,6 +16,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -24,6 +26,13 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @Model
+@NamedQueries({
+    @NamedQuery(name = "Vehicle.getAllVehicles",
+            query = "SELECT v FROM Vehicle V"),
+    @NamedQuery(name = "Vehicle.findByLicenseplate",
+            query = "SELECT v FROM Vehicle V "
+                    + "WHERE v.licensePlate = :license")
+})
 public class Vehicle implements IVehicle, Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

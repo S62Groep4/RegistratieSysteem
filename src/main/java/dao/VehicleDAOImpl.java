@@ -31,7 +31,7 @@ public class VehicleDAOImpl implements VehicleDAO{
 
     @Override
     public List<Vehicle> getAllVehicles() throws PersistenceException {
-        return em.createNamedQuery("Vehicle.findAll").getResultList();
+        return em.createNamedQuery("Vehicle.getAllVehicles").getResultList();
     }
 
     //NOTE returning a bool here is not needed
