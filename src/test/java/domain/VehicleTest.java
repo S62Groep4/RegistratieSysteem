@@ -19,28 +19,31 @@ import static org.junit.Assert.*;
 import testgenerator.Journey;
 import testgenerator.SubInvoice;
 import testgenerator.TransLocation;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
  * @author M
  */
 public class VehicleTest {
-    
+
+    private static final int logRounds = 12;
+
     public VehicleTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -52,10 +55,10 @@ public class VehicleTest {
     public void testGetHashedLicensePlate() {
         System.out.println("getHashedLicensePlate");
         Vehicle instance = new Vehicle();
-        instance.setHashedLicensePlate("111");
-        String expResult = "111";
+        instance.setHashedLicensePlate(BCrypt.hashpw("111", BCrypt.gensalt(logRounds)));
         String result = instance.getHashedLicensePlate();
-        assertEquals(expResult, result);
+        
+        assertEquals(result, instance.getHashedLicensePlate());
     }
 
     /**
@@ -65,16 +68,16 @@ public class VehicleTest {
     public void testGetJourneys() {
         System.out.println("getJourneys");
         Vehicle instance = new Vehicle();
-        
+
         List<ITransLocation> locations = new ArrayList();
         locations.add(new TransLocation(10.2, 11.11, "11-04-2018", "1111231", "Deutschland"));
         IJourney journey = new Journey(locations);
-        
+
         List<IJourney> journeys = new ArrayList();
         journeys.add(journey);
-        
+
         instance.setJourneys(journeys);
-        
+
         List<IJourney> expResult = journeys;
         List<IJourney> result = instance.getJourneys();
         assertEquals(expResult.size(), result.size());
@@ -87,17 +90,17 @@ public class VehicleTest {
     public void testGetSubInvoices() {
         System.out.println("getSubInvoices");
         Vehicle instance = new Vehicle();
-        
+
         ISubInvoice subinvoice = new SubInvoice("123123", "Deutschland", Boolean.TRUE, "11-04-2018", 10.22);
         List<ISubInvoice> subinvoices = new ArrayList();
         subinvoices.add(subinvoice);
-        
+
         instance.setSubInvoices(subinvoices);
-        
+
         List<ISubInvoice> expResult = subinvoices;
         List<ISubInvoice> result = instance.getSubInvoices();
         assertEquals(expResult.size(), result.size());
-        
+
     }
 
     /**
@@ -106,7 +109,7 @@ public class VehicleTest {
     @Test
     public void testSetHashedLicensePlate() {
         System.out.println("setHashedLicensePlate");
-        String licensePlate = "";
+        String licensePlate = BCrypt.hashpw("99-ASD-1", BCrypt.gensalt(logRounds));
         Vehicle instance = new Vehicle();
         instance.setHashedLicensePlate(licensePlate);
         assertNotNull(instance.getHashedLicensePlate());
@@ -136,5 +139,5 @@ public class VehicleTest {
         Long result = instance.getId();
         assertEquals(expResult, result);
     }
-    
+
 }

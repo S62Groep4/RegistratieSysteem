@@ -29,6 +29,7 @@ import testgenerator.Journey;
 import testgenerator.SubInvoice;
 import testgenerator.TransLocation;
 import util.DatabaseCleaner;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -40,6 +41,8 @@ public class VehicleDAOImplTest {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("RegistratieSysteemTestPU");
     private EntityManager em;
     private EntityTransaction et;
+
+    private static final int logRounds = 12;
 
     public VehicleDAOImplTest() {
     }
@@ -74,7 +77,7 @@ public class VehicleDAOImplTest {
     public void testGetHashedLicensePlate() {
         System.out.println("getHashedLicensePlate");
         Vehicle instance = new Vehicle();
-        instance.setHashedLicensePlate("111");
+        instance.setHashedLicensePlate(BCrypt.hashpw("111", BCrypt.gensalt(logRounds)));
         String expResult = "111";
         String result = instance.getHashedLicensePlate();
 
@@ -93,7 +96,7 @@ public class VehicleDAOImplTest {
     public void testGetJourneys() {
         System.out.println("getJourneys");
         Vehicle instance = new Vehicle();
-        instance.setHashedLicensePlate("82-SS-11");
+        instance.setHashedLicensePlate(BCrypt.hashpw("82-SS-11", BCrypt.gensalt(logRounds)));
 
         List<ITransLocation> locations = new ArrayList();
         locations.add(new TransLocation(10.2, 11.11, "11-04-2018", "1111231", "Deutschland"));
@@ -121,7 +124,7 @@ public class VehicleDAOImplTest {
     public void testGetSubInvoices() {
         System.out.println("getSubInvoices");
         Vehicle instance = new Vehicle();
-        instance.setHashedLicensePlate("99-XXS-1");
+        instance.setHashedLicensePlate(BCrypt.hashpw("99-XXS-1", BCrypt.gensalt(logRounds)));
 
         ISubInvoice subinvoice = new SubInvoice("123123", "Deutschland", Boolean.TRUE, "11-04-2018", 10.22);
         List<ISubInvoice> subinvoices = new ArrayList();
@@ -147,7 +150,7 @@ public class VehicleDAOImplTest {
     @Test
     public void testSetHashedLicensePlate() {
         System.out.println("setHashedLicensePlate");
-        String licensePlate = "AAA-BB-C";
+        String licensePlate = BCrypt.hashpw("AAA-BB-C", BCrypt.gensalt(logRounds));
         Vehicle instance = new Vehicle();
         instance.setHashedLicensePlate(licensePlate);
 
@@ -166,13 +169,13 @@ public class VehicleDAOImplTest {
         System.out.println("setId");
         Long id = 1L;
         Vehicle instance = new Vehicle();
-        instance.setHashedLicensePlate("88-HH-11");
+        instance.setHashedLicensePlate(BCrypt.hashpw("88-HH-11", BCrypt.gensalt(logRounds)));
         instance.setId(id);
 
         et.begin();
         em.persist(instance);
         et.commit();
-        
+
         assertEquals(instance.getId(), em.find(Vehicle.class, instance.getId()).getId());
     }
 
@@ -183,7 +186,7 @@ public class VehicleDAOImplTest {
     public void testGetId() {
         System.out.println("getId");
         Vehicle instance = new Vehicle();
-        instance.setHashedLicensePlate("00-JJ-88");
+        instance.setHashedLicensePlate(BCrypt.hashpw("00-JJ-88", BCrypt.gensalt(logRounds)));
         instance.setId(1L);
         Long expResult = 1L;
         Long result = instance.getId();

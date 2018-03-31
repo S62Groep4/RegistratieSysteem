@@ -17,6 +17,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -46,6 +47,8 @@ public class init {
     private List<ISubInvoice> subInvoices4 = null;
     private List<ISubInvoice> subInvoices5 = null;
 
+    private static final int logRounds = 12;
+    
     @PostConstruct
     public void init() {
         System.out.println("CREATE TEST DATA");
@@ -58,14 +61,14 @@ public class init {
 
         vehicles = new ArrayList();
 
-        vehicles.add(new Vehicle("XF-SX-94", journeys, subInvoices1));
-        vehicles.add(new Vehicle("GS-89-RT", journeys, subInvoices1));
-        vehicles.add(new Vehicle("GF-TE-84", journeys, subInvoices1));
-        vehicles.add(new Vehicle("22-AS-87", journeys, subInvoices2));
-        vehicles.add(new Vehicle("1-GsV-54", journeys, subInvoices2));
-        vehicles.add(new Vehicle("W-A1A-31", journeys, subInvoices3));
-        vehicles.add(new Vehicle("13-HG-22", journeys, subInvoices4));
-        vehicles.add(new Vehicle("11-JJH-9", journeys, subInvoices5));
+        vehicles.add(new Vehicle(BCrypt.hashpw("XF-SX-94", BCrypt.gensalt(logRounds)), journeys, subInvoices1));
+        vehicles.add(new Vehicle(BCrypt.hashpw("GS-89-RT", BCrypt.gensalt(logRounds)), journeys, subInvoices1));
+        vehicles.add(new Vehicle(BCrypt.hashpw("GF-TE-84", BCrypt.gensalt(logRounds)), journeys, subInvoices1));
+        vehicles.add(new Vehicle(BCrypt.hashpw("22-AS-87", BCrypt.gensalt(logRounds)), journeys, subInvoices2));
+        vehicles.add(new Vehicle(BCrypt.hashpw("1-GsV-54", BCrypt.gensalt(logRounds)), journeys, subInvoices2));
+        vehicles.add(new Vehicle(BCrypt.hashpw("W-A1A-31", BCrypt.gensalt(logRounds)), journeys, subInvoices3));
+        vehicles.add(new Vehicle(BCrypt.hashpw("13-HG-22", BCrypt.gensalt(logRounds)), journeys, subInvoices4));
+        vehicles.add(new Vehicle(BCrypt.hashpw("11-JJH-9", BCrypt.gensalt(logRounds)), journeys, subInvoices5));
 
         for (Vehicle vehicle : vehicles) {
             vehicleDAO.insertVehicle(vehicle);
