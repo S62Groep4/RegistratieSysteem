@@ -12,6 +12,8 @@ import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -37,6 +39,20 @@ public class VehicleResource {
         return vehicleService.insertVehicle(vehicle);
     }
         
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("update")
+    public Boolean updateVehicle(Vehicle vehicle){
+        return vehicleService.updateVehicle(vehicle);
+    }
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("remove")
+    public Boolean removeVehicle(Vehicle vehicle){
+        return vehicleService.removeVehicle(vehicle);
+    }
+    
     @GET
     public List<Vehicle> vehicles(){
         return vehicleService.getAllVehicles();
