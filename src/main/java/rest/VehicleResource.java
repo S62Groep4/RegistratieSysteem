@@ -32,10 +32,11 @@ public class VehicleResource {
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void insertVehicle(Vehicle vehicle){
-        vehicleService.insertVehicle(vehicle);
+    @Path("add")
+    public Boolean insertVehicle(Vehicle vehicle){
+        return vehicleService.insertVehicle(vehicle);
     }
-    
+        
     @GET
     public List<Vehicle> vehicles(){
         return vehicleService.getAllVehicles();
