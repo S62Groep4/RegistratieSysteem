@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -30,6 +31,7 @@ public class Vehicle implements IVehicle, Serializable{
     private String licensePlate = null;
     private List<IJourney> journeys = new ArrayList();
     private List<ISubInvoice> subInvoices = new ArrayList();
+    private List<Movement> movements = new ArrayList();
     
     public Vehicle(){
         

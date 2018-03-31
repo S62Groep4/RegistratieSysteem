@@ -30,15 +30,19 @@ public class Journey implements IJourney, Serializable {
     private List<ITransLocation> translocations;
     
     public Journey(){
-        this.translocations = new ArrayList();
+
     }
     
     public Journey(List<ITransLocation> transLocations){
-        this.translocations = new ArrayList();
+        this.translocations = transLocations;
     }
 
     @Override
     public List<ITransLocation> getTransLocations() {
         return this.translocations;
+    }
+    
+    public void setTranslocations(List<ITransLocation> translocations){
+        this.translocations = translocations;
     }
 }
