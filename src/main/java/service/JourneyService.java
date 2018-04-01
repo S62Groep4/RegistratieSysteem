@@ -19,14 +19,14 @@ import dao.JourneyDAO;
  * @author M
  */
 @Stateless
-public class MovementService {
+public class JourneyService {
 
     @Inject
     JourneyDAO journeyDAO;
 
-    private static final Logger LOGGER = Logger.getLogger(MovementService.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(JourneyService.class.getName());
 
-    public MovementService() {
+    public JourneyService() {
 
     }
 
@@ -39,9 +39,9 @@ public class MovementService {
         }
     }
 
-    public List<Journey> getJourney(List<Journey> journey) throws PersistenceException {
+    public List<Journey> getJourney(Long Id) throws PersistenceException {
         try {
-            return journeyDAO.getJourney(journey);
+            return journeyDAO.getJourney(Id);
         } catch (PersistenceException pe) {
             LOGGER.log(Level.FINE, "ERROR while performing getMovement method; {0}", pe.getMessage());
             return null;

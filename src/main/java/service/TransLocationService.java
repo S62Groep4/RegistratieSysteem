@@ -25,7 +25,7 @@ public class TransLocationService {
     @Inject
     TransLocationDAO translocationDAO;
 
-    private static final Logger LOGGER = Logger.getLogger(MovementService.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(JourneyService.class.getName());
 
     public TransLocationService() {
 

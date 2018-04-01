@@ -24,12 +24,12 @@ public class JourneyDAOImpl implements JourneyDAO {
     
     @Override
     public List<Journey> getJourneys() throws PersistenceException {
-        return em.createNamedQuery("Movement.getJourneys").getResultList();
+        return em.createNamedQuery("Journey.getAllJourneys").getResultList();
     }
 
     @Override
-    public List<Journey> getJourney(List<Journey> journey) throws PersistenceException {
-        return em.createNamedQuery("Movement.getJourney").setParameter("journey", journey).getResultList();
+    public List<Journey> getJourney(Long Id) throws PersistenceException {
+        return em.createNamedQuery("Journey.findJourney").setParameter("Id", Id).getResultList();
     }
 
     @Override
@@ -46,7 +46,8 @@ public class JourneyDAOImpl implements JourneyDAO {
 
     @Override
     public Boolean removeJourney(Journey journey) throws PersistenceException {
-        em.remove(journey);
+        Journey managedJourney = em.find(Journey.class, journey.getId());
+        em.remove(managedJourney);
         return true;
     }
     

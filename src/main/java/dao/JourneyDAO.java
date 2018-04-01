@@ -17,7 +17,7 @@ public interface JourneyDAO {
 
     List<Journey> getJourneys() throws PersistenceException;
 
-    List<Journey> getJourney(List<Journey> journey) throws PersistenceException;
+    List<Journey> getJourney(Long Id) throws PersistenceException;
 
     Boolean insertJourney(Journey journey) throws PersistenceException;
 

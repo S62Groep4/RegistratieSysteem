@@ -7,11 +7,13 @@ package domain;
 
 import interfaces.ITransLocation;
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.enterprise.inject.Model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -38,6 +40,9 @@ public class TransLocation implements ITransLocation, Serializable {
     private String dateTime = null;
     private String serialNumber = null;
     private String countryCode = null;
+    
+    //@ManyToOne
+    //private Journey journey = null;
 
     public TransLocation() {
 
@@ -50,6 +55,7 @@ public class TransLocation implements ITransLocation, Serializable {
         this.dateTime = dateTime;
         this.serialNumber = serialNumber;
         this.countryCode = countryCode;
+        //this.journey = new Journey();
     }
 
     public void setLat(Double lat){
