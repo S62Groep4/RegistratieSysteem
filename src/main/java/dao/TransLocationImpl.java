@@ -25,12 +25,12 @@ public class TransLocationImpl implements TransLocationDAO {
 
     @Override
     public List<TransLocation> getTransLocations() throws PersistenceException {
-        return em.createNamedQuery("Translocation.getTranslocations").getResultList();
+        return em.createNamedQuery("Translocation.getAllTranslocations").getResultList();
     }
 
     @Override
     public List<TransLocation> getTransLocation(String dateTime) throws PersistenceException {
-        return em.createNamedQuery("Translocation.getTranslocation").setParameter("dateTime", dateTime).getResultList();
+        return em.createNamedQuery("Translocation.findTranslocation").setParameter("dateTime", dateTime).getResultList();
     }
 
     @Override
@@ -47,7 +47,8 @@ public class TransLocationImpl implements TransLocationDAO {
 
     @Override
     public Boolean removeTransLocation(TransLocation translocation) throws PersistenceException {
-        em.remove(translocation);
+        TransLocation managedTranslocation = em.find(TransLocation.class, translocation.getId());
+        em.remove(managedTranslocation);
         return true;
     }
 

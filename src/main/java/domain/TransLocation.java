@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
@@ -19,6 +21,13 @@ import javax.persistence.Id;
  */
 @Model
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Translocation.getAllTranslocations",
+            query = "SELECT t from TransLocation t"),
+    @NamedQuery(name = "Translocation.findTranslocation",
+            query = "SELECT t from TransLocation t "
+                    + "WHERE t.dateTime = :dateTime")
+})
 public class TransLocation implements ITransLocation, Serializable {
 
     @Id
