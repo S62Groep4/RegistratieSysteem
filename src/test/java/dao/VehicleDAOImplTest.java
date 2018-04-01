@@ -26,7 +26,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
 import domain.Journey;
-import testgenerator.SubInvoice;
+import utildatagenerator.SubInvoice;
 import domain.TransLocation;
 import util.DatabaseCleaner;
 import org.mindrot.jbcrypt.BCrypt;
@@ -35,7 +35,6 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author M
  */
-@Ignore
 public class VehicleDAOImplTest {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("RegistratieSysteemTestPU");
@@ -57,11 +56,11 @@ public class VehicleDAOImplTest {
 
     @Before
     public void setUp() {
-        //try {
-        //    new DatabaseCleaner(emf.createEntityManager()).clean();
-        //} catch (SQLException ex) {
-        //Logger.getLogger(UserRestTest.class.getName()).log(Level.SEVERE, null, ex);
-        //}
+        try {
+            new DatabaseCleaner(emf.createEntityManager()).clean();
+        } catch (SQLException ex) {
+        Logger.getLogger(VehicleDAOImplTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         em = emf.createEntityManager();
         et = em.getTransaction();
     }

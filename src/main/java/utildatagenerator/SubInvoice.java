@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testgenerator;
+package utildatagenerator;
 
 import interfaces.ISubInvoice;
 import java.io.Serializable;

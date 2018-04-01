@@ -4,6 +4,8 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>domain.Account</class>
         <class>domain.Vehicle</class>
+        <class>domain.Journey</class>
+        <class>domain.TransLocation</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <shared-cache-mode>NONE</shared-cache-mode>
         
