@@ -13,34 +13,39 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
  *
  * @author M
  */
-@Model
+/*
 @Entity
-public class Movement implements Serializable{
-    
+@Model
+public class Movement implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+    @ManyToOne
+    private Vehicle vehicle = null;
+    @OneToMany
     private List<LatLng> movements = null;
-    
-    public Movement(){
-        
+
+    public Movement() {
+
     }
-    
-    public Movement(List<LatLng> movements){
+
+    public Movement(List<LatLng> movements) {
         this.movements = new ArrayList();
     }
-    
-    public void setMovements(List<LatLng> movements){
+
+    public void setMovements(List<LatLng> movements) {
         this.movements = movements;
     }
-    
-    public List<LatLng> getMovements(){
+
+    public List<LatLng> getMovements() {
         return this.movements;
     }
-}
+}*/

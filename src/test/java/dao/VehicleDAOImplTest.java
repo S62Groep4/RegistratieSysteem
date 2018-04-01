@@ -25,9 +25,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
-import testgenerator.Journey;
+import domain.Journey;
 import testgenerator.SubInvoice;
-import testgenerator.TransLocation;
+import domain.TransLocation;
 import util.DatabaseCleaner;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -35,7 +35,7 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author M
  */
-//@Ignore
+@Ignore
 public class VehicleDAOImplTest {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("RegistratieSysteemTestPU");

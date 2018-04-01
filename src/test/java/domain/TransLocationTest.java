@@ -12,14 +12,15 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
  * @author M
  */
-public class LatLngTest {
+public class TransLocationTest {
     
-    public LatLngTest() {
+    public TransLocationTest() {
     }
     
     @BeforeClass
@@ -45,7 +46,7 @@ public class LatLngTest {
     public void testSetId() {
         System.out.println("setId");
         Long Id = 1L;
-        LatLng instance = new LatLng();
+        TransLocation instance = new TransLocation();
         instance.setId(Id);
         assertNotNull(instance.getId());
     }
@@ -56,7 +57,7 @@ public class LatLngTest {
     @Test
     public void testGetId() {
         System.out.println("getId");
-        LatLng instance = new LatLng();
+        TransLocation instance = new TransLocation();
         instance.setId(1L);
         Long expResult = 1L;
         Long result = instance.getId();
@@ -70,7 +71,7 @@ public class LatLngTest {
     public void testSetLat() {
         System.out.println("setLat");
         Double lat = 10.00;
-        LatLng instance = new LatLng();
+        TransLocation instance = new TransLocation();
         instance.setLat(lat);
         assertNotNull(instance.getLat());
     }
@@ -81,7 +82,7 @@ public class LatLngTest {
     @Test
     public void testGetLat() {
         System.out.println("getLat");
-        LatLng instance = new LatLng();
+        TransLocation instance = new TransLocation();
         instance.setLat(10.00);
         Double expResult = 10.00;
         Double result = instance.getLat();
@@ -95,9 +96,9 @@ public class LatLngTest {
     public void testSetLongValue() {
         System.out.println("setLongValue");
         Double longValue = 10.00;
-        LatLng instance = new LatLng();
-        instance.setLongValue(longValue);
-        assertNotNull(instance.getLongValue());
+        TransLocation instance = new TransLocation();
+        instance.setLon(longValue);
+        assertNotNull(instance.getLon());
     }
 
     /**
@@ -106,10 +107,10 @@ public class LatLngTest {
     @Test
     public void testGetLongValue() {
         System.out.println("getLongValue");
-        LatLng instance = new LatLng();
-        instance.setLongValue(10.00);
+        TransLocation instance = new TransLocation();
+        instance.setLon(10.00);
         Double expResult = 10.00;
-        Double result = instance.getLongValue();
+        Double result = instance.getLon();
         assertEquals(expResult, result);
     }
 
@@ -119,10 +120,10 @@ public class LatLngTest {
     @Test
     public void testSetTime() {
         System.out.println("setTime");
-        Date time = new Date();
-        LatLng instance = new LatLng();
-        instance.setTime(time);
-        assertNotNull(instance.getTime());
+        String time = "11-04-2018";
+        TransLocation instance = new TransLocation();
+        instance.setDateTime(time);
+        assertNotNull(instance.getDateTime());
     }
 
     /**
@@ -131,10 +132,10 @@ public class LatLngTest {
     @Test
     public void testGetTime() {
         System.out.println("getTime");
-        LatLng instance = new LatLng();
-        Date expResult = new Date();
-        instance.setTime(new Date());
-        Date result = instance.getTime();
+        TransLocation instance = new TransLocation();
+        String expResult = "11-04-2018";
+        instance.setDateTime("11-04-2018");
+        String result = instance.getDateTime();
         assertEquals(expResult, result);
     }
 
@@ -145,9 +146,9 @@ public class LatLngTest {
     public void testSetProvincie() {
         System.out.println("setProvincie");
         String provincie = "Berlin";
-        LatLng instance = new LatLng();
-        instance.setProvincie(provincie);
-        assertNotNull(instance.getProvincie());
+        TransLocation instance = new TransLocation();
+        instance.setCountryCode(provincie);
+        assertNotNull(instance.getCountryCode());
     }
 
     /**
@@ -156,10 +157,10 @@ public class LatLngTest {
     @Test
     public void testGetProvincie() {
         System.out.println("getProvincie");
-        LatLng instance = new LatLng();
-        instance.setProvincie("Berlin");
+        TransLocation instance = new TransLocation();
+        instance.setCountryCode("Berlin");
         String expResult = "Berlin";
-        String result = instance.getProvincie();
+        String result = instance.getCountryCode();
         assertEquals(expResult, result);
     }
     

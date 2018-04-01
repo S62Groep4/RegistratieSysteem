@@ -16,9 +16,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import testgenerator.Journey;
 import testgenerator.SubInvoice;
-import testgenerator.TransLocation;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**

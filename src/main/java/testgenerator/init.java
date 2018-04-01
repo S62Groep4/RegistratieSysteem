@@ -5,10 +5,12 @@
  */
 package testgenerator;
 
+import dao.JourneyDAO;
+import dao.TransLocationDAO;
+import domain.TransLocation;
+import domain.Journey;
 import dao.VehicleDAO;
-import dao.VehicleDAOImpl;
 import domain.Vehicle;
-import interfaces.IJourney;
 import interfaces.ISubInvoice;
 import interfaces.ITransLocation;
 import java.util.ArrayList;
@@ -30,6 +32,12 @@ public class init {
     @JPA
     @Inject
     VehicleDAO vehicleDAO;
+    
+    @Inject
+    JourneyDAO journeyDAO;
+    
+    @Inject
+    TransLocationDAO translocationDAO;
 
     private List<ITransLocation> transLocations = null;
     private TransLocation transLocation1 = null;
@@ -39,7 +47,7 @@ public class init {
     private TransLocation transLocation5 = null;
 
     private List<Vehicle> vehicles = null;
-    private List<IJourney> journeys = null;
+    private List<Journey> journeys = null;
 
     private List<ISubInvoice> subInvoices1 = null;
     private List<ISubInvoice> subInvoices2 = null;
@@ -61,14 +69,14 @@ public class init {
 
         vehicles = new ArrayList();
 
-        vehicles.add(new Vehicle(BCrypt.hashpw("XF-SX-94", BCrypt.gensalt(logRounds)), journeys, subInvoices1));
-        vehicles.add(new Vehicle(BCrypt.hashpw("GS-89-RT", BCrypt.gensalt(logRounds)), journeys, subInvoices1));
-        vehicles.add(new Vehicle(BCrypt.hashpw("GF-TE-84", BCrypt.gensalt(logRounds)), journeys, subInvoices1));
-        vehicles.add(new Vehicle(BCrypt.hashpw("22-AS-87", BCrypt.gensalt(logRounds)), journeys, subInvoices2));
-        vehicles.add(new Vehicle(BCrypt.hashpw("1-GsV-54", BCrypt.gensalt(logRounds)), journeys, subInvoices2));
-        vehicles.add(new Vehicle(BCrypt.hashpw("W-A1A-31", BCrypt.gensalt(logRounds)), journeys, subInvoices3));
-        vehicles.add(new Vehicle(BCrypt.hashpw("13-HG-22", BCrypt.gensalt(logRounds)), journeys, subInvoices4));
-        vehicles.add(new Vehicle(BCrypt.hashpw("11-JJH-9", BCrypt.gensalt(logRounds)), journeys, subInvoices5));
+        vehicles.add(new Vehicle(BCrypt.hashpw("XF-SX-94", BCrypt.gensalt(logRounds))));
+        vehicles.add(new Vehicle(BCrypt.hashpw("GS-89-RT", BCrypt.gensalt(logRounds))));
+        vehicles.add(new Vehicle(BCrypt.hashpw("GF-TE-84", BCrypt.gensalt(logRounds))));
+        vehicles.add(new Vehicle(BCrypt.hashpw("22-AS-87", BCrypt.gensalt(logRounds))));
+        vehicles.add(new Vehicle(BCrypt.hashpw("1-GsV-54", BCrypt.gensalt(logRounds))));
+        vehicles.add(new Vehicle(BCrypt.hashpw("W-A1A-31", BCrypt.gensalt(logRounds))));
+        vehicles.add(new Vehicle(BCrypt.hashpw("13-HG-22", BCrypt.gensalt(logRounds))));
+        vehicles.add(new Vehicle(BCrypt.hashpw("11-JJH-9", BCrypt.gensalt(logRounds))));
 
         for (Vehicle vehicle : vehicles) {
             vehicleDAO.insertVehicle(vehicle);
@@ -92,6 +100,14 @@ public class init {
         transLocations.add(transLocation4);
         transLocations.add(transLocation5);
         journeys.add(new Journey(transLocations));
+        
+        for(ITransLocation translocation : transLocations){
+            translocationDAO.insertTransLocation(translocation);
+        }
+        
+        for(Journey journey : journeys){
+            journeyDAO.insertJourney(journey);
+        }
     }
 
     public void createSubInvoices() {

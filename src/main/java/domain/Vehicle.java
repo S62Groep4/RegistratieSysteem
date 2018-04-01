@@ -40,13 +40,14 @@ public class Vehicle implements IVehicle, Serializable{
     private String licensePlate = null;
     private List<IJourney> journeys = new ArrayList();
     private List<ISubInvoice> subInvoices = new ArrayList();
-    private List<Movement> movements = new ArrayList();
+    //@OneToMany
+    //private List<Movement> movements = new ArrayList();
     
     public Vehicle(){
         
     }
     
-    public Vehicle(String licensePlate, List<IJourney> journeys, List<ISubInvoice> subInvoices){
+    public Vehicle(String licensePlate){
         this.licensePlate = licensePlate;
     }
 

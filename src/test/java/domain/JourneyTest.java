@@ -7,6 +7,7 @@ package domain;
 
 import interfaces.ILatLng;
 import interfaces.IMovement;
+import interfaces.ITransLocation;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,14 +17,15 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
  * @author M
  */
-public class MovementTest {
+public class JourneyTest {
     
-    public MovementTest() {
+    public JourneyTest() {
     }
     
     @BeforeClass
@@ -48,11 +50,11 @@ public class MovementTest {
     @Test
     public void testSetMovements() {
         System.out.println("setMovements");
-        List<LatLng> movements = new ArrayList();
-        movements.add(new LatLng(10.0, 11.11, new Date(), "Berlin"));
-        Movement instance = new Movement();
-        instance.setMovements(movements);
-        assertNotNull(instance.getMovements());
+        List<ITransLocation> movements = new ArrayList();
+        movements.add(new TransLocation(10.0, 11.11, "11-04-2018", "123", "Berlin"));
+        Journey instance = new Journey();
+        instance.setTranslocations(movements);
+        assertNotNull(instance.getTransLocations());
     }
 
     /**
@@ -61,13 +63,13 @@ public class MovementTest {
     @Test
     public void testGetMovements() {
         System.out.println("getMovements");
-        Movement instance = new Movement();
-        List<LatLng> latLngs = new ArrayList();
-        latLngs.add(new LatLng(10.22, 11.33, new Date(), "Berlin"));
-        instance.setMovements(latLngs);
+        Journey instance = new Journey();
+        List<ITransLocation> latLngs = new ArrayList();
+        latLngs.add(new TransLocation(10.22, 11.33, "11-04-2018", "12313" ,"Berlin"));
+        instance.setTranslocations(latLngs);
         
-        List<LatLng> expResult = latLngs;
-        List<LatLng> result = instance.getMovements();
+        List<ITransLocation> expResult = latLngs;
+        List<ITransLocation> result = instance.getTransLocations();
         assertEquals(expResult.size(), result.size());
     }
     

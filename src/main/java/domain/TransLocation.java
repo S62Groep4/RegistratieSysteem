@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testgenerator;
+package domain;
 
 import interfaces.ITransLocation;
 import java.io.Serializable;
@@ -19,7 +19,7 @@ import javax.persistence.Id;
  */
 @Model
 @Entity
-public class TransLocation implements ITransLocation, Serializable{
+public class TransLocation implements ITransLocation, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,18 +29,22 @@ public class TransLocation implements ITransLocation, Serializable{
     private String dateTime = null;
     private String serialNumber = null;
     private String countryCode = null;
-    
-    public TransLocation(){
-        
+
+    public TransLocation() {
+
     }
-    
+
     public TransLocation(Double lat, Double lon, String dateTime, String serialNumber,
-            String countryCode){
+            String countryCode) {
         this.lat = lat;
         this.lon = lon;
         this.dateTime = dateTime;
         this.serialNumber = serialNumber;
         this.countryCode = countryCode;
+    }
+
+    public void setLat(Double lat){
+        this.lat = lat;
     }
     
     @Override
@@ -48,9 +52,17 @@ public class TransLocation implements ITransLocation, Serializable{
         return this.lat;
     }
 
+    public void setLon(Double lon){
+        this.lon = lon;
+    }
+    
     @Override
     public Double getLon() {
         return this.lon;
+    }
+    
+    public void setDateTime(String dateTime){
+        this.dateTime = dateTime;
     }
 
     @Override
@@ -58,13 +70,29 @@ public class TransLocation implements ITransLocation, Serializable{
         return this.dateTime;
     }
 
+    public void setSerialNumber(String serialNumber){
+        this.serialNumber = serialNumber;
+    }
+    
     @Override
     public String getSerialNumber() {
         return this.serialNumber;
     }
 
+    public void setCountryCode(String countryCode){
+        this.countryCode = countryCode;
+    }
+    
     @Override
     public String getCountryCode() {
         return this.countryCode;
+    }
+    
+    public void setId(Long id){
+        this.id = id;
+    }
+    
+    public Long getId(){
+        return this.id;
     }
 }

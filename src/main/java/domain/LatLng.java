@@ -13,11 +13,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author M
  */
+/*
 @Model
 @Entity
 public class LatLng implements ILatLng, Serializable {
@@ -29,6 +31,8 @@ public class LatLng implements ILatLng, Serializable {
     private Double longValue = null;
     private Date time = null;
     private String provincie = null;
+    @ManyToOne
+    private LatLng latLng = null;
 
     public LatLng(){
         
@@ -85,3 +89,4 @@ public class LatLng implements ILatLng, Serializable {
         return this.provincie;
     }
 }
+*/
