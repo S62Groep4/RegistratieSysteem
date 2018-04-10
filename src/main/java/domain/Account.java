@@ -8,6 +8,8 @@ package domain;
 import java.io.Serializable;
 import javax.enterprise.inject.Model;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -16,19 +18,20 @@ import javax.persistence.Id;
  */
 @Entity
 @Model
-public class User implements Serializable{
+public class Account implements Serializable{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name = null;
     private String email = null;
     private String password = null;
     
-    public User(){
+    public Account(){
         
     }
     
-    public User(String name, String email, String password){
+    public Account(String name, String email, String password){
         this.name = name;
         this.email = email;
         this.password = password;

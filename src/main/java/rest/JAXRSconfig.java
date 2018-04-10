@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package rest;
 
-import domain.User;
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 
 /**
  *
  * @author M
  */
-public interface IUser {
-    User getUser();
-
-    Boolean setUser();
+@ApplicationPath("api")
+public class JAXRSconfig extends Application{
+    
 }

@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package interfaces;
+
+import domain.Account;
 
 /**
  *
  * @author M
  */
-public interface ILatLng {
-    
+public interface IUser {
+    Account getUser();
+    Boolean setUser();
 }
