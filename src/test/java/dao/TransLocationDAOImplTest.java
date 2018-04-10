@@ -6,28 +6,27 @@
 package dao;
 
 import domain.TransLocation;
-import interfaces.ITransLocation;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import util.DatabaseCleaner;
 
 /**
  *
  * @author M
  */
+@Ignore
 public class TransLocationDAOImplTest {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("RegistratieSysteemTestPU");

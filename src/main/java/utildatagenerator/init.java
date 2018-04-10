@@ -39,7 +39,7 @@ public class init {
     @Inject
     TransLocationDAO translocationDAO;
 
-    private List<ITransLocation> transLocations = null;
+    private List<TransLocation> transLocations = null;
     private TransLocation transLocation1 = null;
     private TransLocation transLocation2 = null;
     private TransLocation transLocation3 = null;
@@ -49,20 +49,21 @@ public class init {
     private List<Vehicle> vehicles = null;
     private List<Journey> journeys = null;
 
-    private List<ISubInvoice> subInvoices1 = null;
-    private List<ISubInvoice> subInvoices2 = null;
-    private List<ISubInvoice> subInvoices3 = null;
-    private List<ISubInvoice> subInvoices4 = null;
-    private List<ISubInvoice> subInvoices5 = null;
+    private List<SubInvoice> subInvoices1 = null;
+    private List<SubInvoice> subInvoices2 = null;
+    private List<SubInvoice> subInvoices3 = null;
+    private List<SubInvoice> subInvoices4 = null;
+    private List<SubInvoice> subInvoices5 = null;
 
     private static final int logRounds = 12;
     
     @PostConstruct
     public void init() {
         System.out.println("CREATE TEST DATA");
+        createCars();
         createJourneys();
         createSubInvoices();
-        createCars();
+        //createCars();
     }
 
     public void createCars() {
@@ -73,8 +74,8 @@ public class init {
         vehicles.add(new Vehicle(BCrypt.hashpw("GS-89-RT", BCrypt.gensalt(logRounds))));
         vehicles.add(new Vehicle(BCrypt.hashpw("GF-TE-84", BCrypt.gensalt(logRounds))));
         vehicles.add(new Vehicle(BCrypt.hashpw("22-AS-87", BCrypt.gensalt(logRounds))));
-        vehicles.add(new Vehicle(BCrypt.hashpw("1-GsV-54", BCrypt.gensalt(logRounds))));
-        vehicles.add(new Vehicle(BCrypt.hashpw("W-A1A-31", BCrypt.gensalt(logRounds))));
+        vehicles.add(new Vehicle(BCrypt.hashpw("11-SV-54", BCrypt.gensalt(logRounds))));
+        vehicles.add(new Vehicle(BCrypt.hashpw("WW-1A-31", BCrypt.gensalt(logRounds))));
         vehicles.add(new Vehicle(BCrypt.hashpw("13-HG-22", BCrypt.gensalt(logRounds))));
         vehicles.add(new Vehicle(BCrypt.hashpw("11-JJH-9", BCrypt.gensalt(logRounds))));
 
@@ -101,7 +102,7 @@ public class init {
         transLocations.add(transLocation5);
         journeys.add(new Journey(transLocations));
         
-        for(ITransLocation translocation : transLocations){
+        for(TransLocation translocation : transLocations){
             translocationDAO.insertTransLocation(translocation);
         }
         

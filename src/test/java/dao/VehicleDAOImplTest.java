@@ -35,6 +35,7 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author M
  */
+@Ignore
 public class VehicleDAOImplTest {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("RegistratieSysteemTestPU");
@@ -97,17 +98,17 @@ public class VehicleDAOImplTest {
         Vehicle instance = new Vehicle();
         instance.setHashedLicensePlate(BCrypt.hashpw("82-SS-11", BCrypt.gensalt(logRounds)));
 
-        List<ITransLocation> locations = new ArrayList();
+        List<TransLocation> locations = new ArrayList();
         locations.add(new TransLocation(10.2, 11.11, "11-04-2018", "1111231", "Deutschland"));
-        IJourney journey = new Journey(locations);
+        Journey journey = new Journey(locations);
 
-        List<IJourney> journeys = new ArrayList();
+        List<Journey> journeys = new ArrayList();
         journeys.add(journey);
 
         instance.setJourneys(journeys);
 
-        List<IJourney> expResult = journeys;
-        List<IJourney> result = instance.getJourneys();
+        List<Journey> expResult = journeys;
+        List<Journey> result = instance.getJourneys();
 
         et.begin();
         em.persist(instance);

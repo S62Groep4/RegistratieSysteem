@@ -7,11 +7,13 @@ package domain;
 
 import interfaces.IJourney;
 import interfaces.ISubInvoice;
+import interfaces.ITransLocation;
 import interfaces.IVehicle;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.inject.Model;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,15 +35,15 @@ import javax.persistence.OneToMany;
             query = "SELECT v FROM Vehicle V "
                     + "WHERE v.licensePlate = :license")
 })
-public class Vehicle implements IVehicle, Serializable{
+public class Vehicle implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String licensePlate = null;
-    private List<IJourney> journeys = new ArrayList();
     private List<ISubInvoice> subInvoices = new ArrayList();
-    //@OneToMany
-    //private List<Movement> movements = new ArrayList();
+    
+    @OneToMany(targetEntity = Journey.class, cascade = CascadeType.ALL)
+    private List<Journey> journeys = new ArrayList();
     
     public Vehicle(){
         
@@ -51,21 +53,18 @@ public class Vehicle implements IVehicle, Serializable{
         this.licensePlate = licensePlate;
     }
 
-    @Override
     public String getHashedLicensePlate() {
         return this.licensePlate;
     }
 
-    @Override
-    public List<IJourney> getJourneys() {
+    public List<Journey> getJourneys() {
         return this.journeys;
     }
     
-    public void setJourneys(List<IJourney> journeys){
+    public void setJourneys(List<Journey> journeys){
         this.journeys = journeys;
     }
 
-    @Override
     public List<ISubInvoice> getSubInvoices() {
         return this.subInvoices;
     }
