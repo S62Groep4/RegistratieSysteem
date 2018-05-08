@@ -14,6 +14,8 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
+import util.StolenVehicleController;
+import util.StolenVehicleWorker;
 
 /**
  *
@@ -28,7 +30,6 @@ public class TransLocationService {
     private static final Logger LOGGER = Logger.getLogger(JourneyService.class.getName());
 
     public TransLocationService() {
-
     }
 
     public List<TransLocation> getTransLocations() throws PersistenceException {
@@ -51,6 +52,8 @@ public class TransLocationService {
 
     public Boolean insertTransLocation(TransLocation translocation) throws PersistenceException {
         try {
+            //Check if the translocation comes from a stolen vehicle
+            Thread t = new Thread(new StolenVehicleWorker(translocation));
             return translocationDAO.insertTransLocation(translocation);
         } catch (PersistenceException pe) {
             LOGGER.log(Level.FINE, "ERROR while performing insertTranslocation method; {0}", pe.getMessage());
