@@ -27,28 +27,45 @@ import javax.persistence.OneToMany;
 @Entity
 @Model
 @NamedQueries({
-    @NamedQuery(name = "Vehicle.getAllVehicles",
-            query = "SELECT v FROM Vehicle V"),
-    @NamedQuery(name = "Vehicle.findByLicenseplate",
-            query = "SELECT v FROM Vehicle V "
-                    + "WHERE v.licensePlate = :license")
+    @NamedQuery(name = "Vehicle.getAllVehicles", query = "SELECT v FROM Vehicle V"),
+    @NamedQuery(name = "Vehicle.findByLicenseplate", query = "SELECT v FROM Vehicle V " + "WHERE v.licensePlate = :license"),
+    @NamedQuery(name = "Vehicle.getBySerial", query = "SELECT v FROM Vehicle V WHERE v.carTrackerSerial = :carSerial")
 })
 public class Vehicle implements IVehicle, Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String licensePlate = null;
+    private String carTrackerSerial;
+    private boolean isMonitored;
     private List<IJourney> journeys = new ArrayList();
     private List<ISubInvoice> subInvoices = new ArrayList();
     //@OneToMany
     //private List<Movement> movements = new ArrayList();
     
     public Vehicle(){
-        
     }
     
-    public Vehicle(String licensePlate){
+    public Vehicle(String licensePlate, String carTrackerSerial){
+        this.carTrackerSerial = carTrackerSerial;
         this.licensePlate = licensePlate;
+        this.isMonitored = false;
+    }
+
+    public boolean isMonitored() {
+        return isMonitored;
+    }
+
+    public void setIsMonitored(boolean isMonitored) {
+        this.isMonitored = isMonitored;
+    }
+
+    public String getCarTrackerSerial() {
+        return carTrackerSerial;
+    }
+
+    public void setCarTrackerSerial(String carTrackerSerial) {
+        this.carTrackerSerial = carTrackerSerial;
     }
 
     @Override

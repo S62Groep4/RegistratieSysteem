@@ -35,6 +35,7 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author M
  */
+@Ignore
 public class VehicleDAOImplTest {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("RegistratieSysteemTestPU");

@@ -33,6 +33,12 @@ public class VehicleDAOImpl implements VehicleDAO{
     public List<Vehicle> getAllVehicles() throws PersistenceException {
         return em.createNamedQuery("Vehicle.getAllVehicles").getResultList();
     }
+    
+    @Override
+    public List<Vehicle> getVehicleByCarTrackerSerial(String carTrackerSerial) throws PersistenceException {
+        List<Vehicle> result = em.createNamedQuery("Vehicle.getBySerial").setParameter("carSerial", carTrackerSerial).getResultList();
+        return result;
+    }
 
     //NOTE returning a bool here is not needed
     @Override
@@ -52,6 +58,5 @@ public class VehicleDAOImpl implements VehicleDAO{
     public boolean insertVehicle(Vehicle vehicle) throws PersistenceException {
         em.persist(vehicle);
         return true;
-    }
-    
+    }    
 }

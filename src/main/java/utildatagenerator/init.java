@@ -69,14 +69,14 @@ public class init {
 
         vehicles = new ArrayList();
 
-        vehicles.add(new Vehicle(BCrypt.hashpw("XF-SX-94", BCrypt.gensalt(logRounds))));
-        vehicles.add(new Vehicle(BCrypt.hashpw("GS-89-RT", BCrypt.gensalt(logRounds))));
-        vehicles.add(new Vehicle(BCrypt.hashpw("GF-TE-84", BCrypt.gensalt(logRounds))));
-        vehicles.add(new Vehicle(BCrypt.hashpw("22-AS-87", BCrypt.gensalt(logRounds))));
-        vehicles.add(new Vehicle(BCrypt.hashpw("1-GsV-54", BCrypt.gensalt(logRounds))));
-        vehicles.add(new Vehicle(BCrypt.hashpw("W-A1A-31", BCrypt.gensalt(logRounds))));
-        vehicles.add(new Vehicle(BCrypt.hashpw("13-HG-22", BCrypt.gensalt(logRounds))));
-        vehicles.add(new Vehicle(BCrypt.hashpw("11-JJH-9", BCrypt.gensalt(logRounds))));
+        vehicles.add(new Vehicle(BCrypt.hashpw("XF-SX-94", BCrypt.gensalt(logRounds)), "1234"));
+        vehicles.add(new Vehicle(BCrypt.hashpw("GS-89-RT", BCrypt.gensalt(logRounds)), "45678"));
+        vehicles.add(new Vehicle(BCrypt.hashpw("GF-TE-84", BCrypt.gensalt(logRounds)), "234252"));
+        vehicles.add(new Vehicle(BCrypt.hashpw("22-AS-87", BCrypt.gensalt(logRounds)), "2345234"));
+        vehicles.add(new Vehicle(BCrypt.hashpw("1-GsV-54", BCrypt.gensalt(logRounds)), "1335"));
+        vehicles.add(new Vehicle(BCrypt.hashpw("W-A1A-31", BCrypt.gensalt(logRounds)), "23452342"));
+        vehicles.add(new Vehicle(BCrypt.hashpw("13-HG-22", BCrypt.gensalt(logRounds)), "234234123"));
+        vehicles.add(new Vehicle(BCrypt.hashpw("11-JJH-9", BCrypt.gensalt(logRounds)), "798655434"));
 
         for (Vehicle vehicle : vehicles) {
             vehicleDAO.insertVehicle(vehicle);
