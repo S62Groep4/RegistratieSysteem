@@ -79,4 +79,14 @@ public class VehicleService {
             return null;
         }
     }
+    
+    public void markVehicleMonitored(String carTrackerSerial){
+        try{
+            Vehicle managedVehicle = vehicleDAO.getVehicleByCarTrackerSerial(carTrackerSerial).get(0);
+            managedVehicle.setIsMonitored(true);
+            this.updateVehicle(managedVehicle);
+        } catch (PersistenceException pe) {
+            LOGGER.log(Level.FINE, "ERROR while performing markVehicleMonitored method; {0}", pe.getMessage());
+        }
+    }
 }

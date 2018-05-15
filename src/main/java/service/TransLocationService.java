@@ -93,7 +93,7 @@ public class TransLocationService {
         try{
             Vehicle vehicle = vehicleDAO.getVehicleByCarTrackerSerial(transLocation.getSerialNumber()).get(0);
             if(vehicle.isMonitored()){
-                
+                postTransLocation(transLocation);
             }
         }catch(PersistenceException pe){
             LOGGER.log(Level.FINE, "ERROR while performing isStolen method; {0}", pe.getMessage());
