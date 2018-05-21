@@ -13,6 +13,10 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import dao.JourneyDAO;
+import domain.TransLocation;
+import interfaces.ITransLocation;
+import interfaces.TransLocationDto;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,6 +28,8 @@ public class JourneyService {
     @Inject
     JourneyDAO journeyDAO;
 
+    public static final List<Journey> activeJourneys = new ArrayList<>();
+    
     private static final Logger LOGGER = Logger.getLogger(JourneyService.class.getName());
 
     public JourneyService() {
@@ -73,5 +79,27 @@ public class JourneyService {
             LOGGER.log(Level.FINE, "ERROR while performing removeMovement method; {0}", pe.getMessage());
             return false;
         }
+    }
+    
+    public static void addTransLocation(TransLocationDto transLocationDto) {
+        Journey currentJourney = new Journey(new ArrayList<TransLocation>());
+        
+        for(Journey j : activeJourneys) {
+            if(j.getTransLocations() != null && j.getTransLocations().size() > 0) {
+                if(j.getTransLocations().get(0).getSerialNumber().equals(transLocationDto.getSerialNumber())) {
+                    currentJourney = j;
+                    break;
+                }
+            }
+        }
+        
+        TransLocation transLocation = new TransLocation();
+        transLocation.setCountryCode(transLocationDto.getCountryCode());
+        transLocation.setDateTime(transLocationDto.getTimestamp());
+        transLocation.setLat(Double.parseDouble(transLocationDto.getLat()));
+        transLocation.setLon(Double.parseDouble(transLocationDto.getLon()));
+        transLocation.setSerialNumber(transLocationDto.getSerialNumber());
+        
+        currentJourney.getTransLocations().add(transLocation);
     }
 }
