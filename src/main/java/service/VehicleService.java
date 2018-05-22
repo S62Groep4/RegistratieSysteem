@@ -22,7 +22,7 @@ import utildatagenerator.JPA;
 @Stateless
 public class VehicleService {
 
-    @Inject 
+    @Inject
     @JPA
     VehicleDAO vehicleDAO;
 

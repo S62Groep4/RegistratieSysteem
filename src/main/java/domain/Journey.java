@@ -31,28 +31,27 @@ import javax.persistence.OneToMany;
             query = "SELECT j FROM Journey j "
                     + "WHERE j.Id = :Id")
 })
-public class Journey implements IJourney, Serializable {
+public class Journey implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long Id;
     //@OneToMany(mappedBy = "journey")
-    private List<ITransLocation> translocations;
+    private List<TransLocation> translocations;
     
     public Journey(){
 
     }
     
-    public Journey(List<ITransLocation> transLocations){
+    public Journey(List<TransLocation> transLocations){
         this.translocations = transLocations;
     }
 
-    @Override
-    public List<ITransLocation> getTransLocations() {
+    public List<TransLocation> getTransLocations() {
         return this.translocations;
     }
     
-    public void setTranslocations(List<ITransLocation> translocations){
+    public void setTranslocations(List<TransLocation> translocations){
         this.translocations = translocations;
     }
     

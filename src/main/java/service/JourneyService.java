@@ -14,7 +14,6 @@ import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import dao.JourneyDAO;
 import domain.TransLocation;
-import interfaces.ITransLocation;
 import interfaces.TransLocationDto;
 import java.util.ArrayList;
 
