@@ -9,23 +9,29 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-    <head>
+    <h:head>
         <title>Registratiesysteem</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <p:dataTable var="journey" value="#{journeyController.activeJourneys}">
-            <p:column headerText="Id">
-                <h:outputText value="#{journey.id}" />
-            </p:column>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:dataTable var="activejourney" value="#{journeyController.activeJourneys}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{activejourney.id}" />
+                </p:column>
 
-            <p:column headerText="Locations">
-                <h:outputText value="#{journey.transLocations.size}" />
-            </p:column>
+                <p:column headerText="Locations">
+                    <h:outputText value="#{activejourney.transLocations.size()}" />
+                </p:column>
 
-            <p:column headerText="last">
-                <h:outputText value="#{journey.transLocations.get(journey.transLocations.size - 1)}" />
-            </p:column>
-        </p:dataTable>
-    </body>
+                <p:column headerText="Cartracker id">
+                    <h:outputText value="#{activejourney.transLocations.get(activejourney.transLocations.size() - 1).serialNumber}" />
+                </p:column>
+
+                <p:column>
+                    <p:commandButton value="Save" id="save-journey" actionListener="#{journeyController.endJourney(activejourney.transLocations.get(activejourney.transLocations.size() - 1).serialNumber)}" styleClass="ui-priority-primary" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:body>
 </html>

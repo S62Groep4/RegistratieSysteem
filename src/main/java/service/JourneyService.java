@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package service;
 
 import domain.Journey;
@@ -16,18 +11,15 @@ import dao.JourneyDAO;
 import domain.TransLocation;
 import interfaces.TransLocationDto;
 import java.util.ArrayList;
+import java.util.Collections;
 
-/**
- *
- * @author M
- */
 @Stateless
 public class JourneyService {
 
     @Inject
     JourneyDAO journeyDAO;
 
-    public static final List<Journey> activeJourneys = new ArrayList<>();
+    public static final List<Journey> activeJourneys = Collections.synchronizedList(new ArrayList<Journey>());
     
     private static final Logger LOGGER = Logger.getLogger(JourneyService.class.getName());
 
@@ -100,5 +92,6 @@ public class JourneyService {
         transLocation.setSerialNumber(transLocationDto.getSerialNumber());
         
         currentJourney.getTransLocations().add(transLocation);
+        JourneyService.activeJourneys.add(currentJourney);
     }
 }

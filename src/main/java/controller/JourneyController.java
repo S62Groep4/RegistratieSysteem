@@ -18,4 +18,8 @@ public class JourneyController implements Serializable {
     public List<Journey> getActiveJourneys() {
         return JourneyService.activeJourneys;
     }
+    
+    public void endJourney(String cartrackerId) {
+        System.out.println("End journey: " + cartrackerId);
+    }
 }
