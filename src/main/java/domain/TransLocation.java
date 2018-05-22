@@ -33,7 +33,7 @@ import javax.persistence.NamedQuery;
 public class TransLocation implements ITransLocation, Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private Double lat = null;
     private Double lon = null;
@@ -41,8 +41,8 @@ public class TransLocation implements ITransLocation, Serializable {
     private String serialNumber = null;
     private String countryCode = null;
     
-    //@ManyToOne
-    //private Journey journey = null;
+    @ManyToOne
+    private Journey journey;
 
     public TransLocation() {
 
@@ -109,5 +109,9 @@ public class TransLocation implements ITransLocation, Serializable {
     
     public Long getId(){
         return this.id;
+    }
+    
+    public void setJourney(Journey journey) {
+        this.journey = journey;
     }
 }

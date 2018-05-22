@@ -10,6 +10,7 @@ import interfaces.ITransLocation;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.inject.Model;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,8 +37,9 @@ public class Journey implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long Id;
-    //@OneToMany(mappedBy = "journey")
+    @OneToMany(mappedBy = "journey", cascade = CascadeType.ALL)
     private List<TransLocation> translocations;
+    private String cartracker;
     
     public Journey(){
 
@@ -61,5 +63,9 @@ public class Journey implements Serializable {
     
     public Long getId(){
         return this.Id;
+    }
+    
+    public void setCartracker(String cartracker) {
+        this.cartracker = cartracker;
     }
 }

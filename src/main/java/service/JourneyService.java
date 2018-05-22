@@ -20,7 +20,7 @@ public class JourneyService {
     JourneyDAO journeyDAO;
 
     public static final List<Journey> activeJourneys = Collections.synchronizedList(new ArrayList<Journey>());
-    
+
     private static final Logger LOGGER = Logger.getLogger(JourneyService.class.getName());
 
     public JourneyService() {
@@ -55,43 +55,68 @@ public class JourneyService {
     }
 
     public Boolean updateJourney(Journey journey) throws PersistenceException {
-        try{
+        try {
             return journeyDAO.updateJourney(journey);
-        }catch(PersistenceException pe){
+        } catch (PersistenceException pe) {
             LOGGER.log(Level.FINE, "ERROR while performing updateMovement method; {0}", pe.getMessage());
             return false;
         }
     }
 
     public Boolean removeJourney(Journey journey) throws PersistenceException {
-        try{
+        try {
             return journeyDAO.removeJourney(journey);
-        }catch(PersistenceException pe){
+        } catch (PersistenceException pe) {
             LOGGER.log(Level.FINE, "ERROR while performing removeMovement method; {0}", pe.getMessage());
             return false;
         }
     }
-    
+
     public static void addTransLocation(TransLocationDto transLocationDto) {
-        Journey currentJourney = new Journey(new ArrayList<TransLocation>());
-        
-        for(Journey j : activeJourneys) {
-            if(j.getTransLocations() != null && j.getTransLocations().size() > 0) {
-                if(j.getTransLocations().get(0).getSerialNumber().equals(transLocationDto.getSerialNumber())) {
+        Journey currentJourney = null;
+
+        for (Journey j : activeJourneys) {
+            if (j.getTransLocations() != null && j.getTransLocations().size() > 0) {
+                if (j.getTransLocations().get(0).getSerialNumber().equals(transLocationDto.getSerialNumber())) {
                     currentJourney = j;
                     break;
                 }
             }
         }
-        
+
         TransLocation transLocation = new TransLocation();
         transLocation.setCountryCode(transLocationDto.getCountryCode());
         transLocation.setDateTime(transLocationDto.getTimestamp());
         transLocation.setLat(Double.parseDouble(transLocationDto.getLat()));
         transLocation.setLon(Double.parseDouble(transLocationDto.getLon()));
         transLocation.setSerialNumber(transLocationDto.getSerialNumber());
-        
-        currentJourney.getTransLocations().add(transLocation);
-        JourneyService.activeJourneys.add(currentJourney);
+
+        if (currentJourney != null) {
+            currentJourney.getTransLocations().add(transLocation);
+            transLocation.setJourney(currentJourney);
+        } else {
+            Journey newJourney = new Journey(new ArrayList<TransLocation>());
+            newJourney.getTransLocations().add(transLocation);
+            transLocation.setJourney(newJourney);
+            JourneyService.activeJourneys.add(newJourney);
+        }
+    }
+
+    public void endJourney(String cartrackerId) {
+        Journey journeyToEnd = null;
+        for (Journey j : activeJourneys) {
+            if (j.getTransLocations() != null && j.getTransLocations().size() > 0) {
+                if (j.getTransLocations().get(0).getSerialNumber().equals(cartrackerId)) {
+                    journeyToEnd = j;
+                    break;
+                }
+            }
+        }
+
+        activeJourneys.remove(journeyToEnd);
+
+        journeyToEnd.setCartracker(journeyToEnd.getTransLocations().get(0).getSerialNumber());
+
+        insertJourney(journeyToEnd);
     }
 }
