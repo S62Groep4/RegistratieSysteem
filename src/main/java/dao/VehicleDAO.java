@@ -18,10 +18,13 @@ public interface VehicleDAO {
     List<Vehicle> getVehicle(String hashedLicenceplate) throws PersistenceException;
 
     List<Vehicle> getAllVehicles() throws PersistenceException;
+    
+    List<Vehicle> getVehicleByCarTrackerSerial(String carTrackerSerial) throws PersistenceException;
 
     boolean updateVehicle(Vehicle vehicle) throws PersistenceException;
 
     boolean removeVehicle(Vehicle vehicle) throws PersistenceException;
 
     boolean insertVehicle(Vehicle vehicle) throws PersistenceException;
+    
 }
