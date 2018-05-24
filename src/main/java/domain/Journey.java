@@ -10,6 +10,7 @@ import interfaces.ITransLocation;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.inject.Model;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,28 +32,28 @@ import javax.persistence.OneToMany;
             query = "SELECT j FROM Journey j "
                     + "WHERE j.Id = :Id")
 })
-public class Journey implements IJourney, Serializable {
+public class Journey implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long Id;
-    //@OneToMany(mappedBy = "journey")
-    private List<ITransLocation> translocations;
+    @OneToMany(mappedBy = "journey", cascade = CascadeType.ALL)
+    private List<TransLocation> translocations;
+    private String cartracker;
     
     public Journey(){
 
     }
     
-    public Journey(List<ITransLocation> transLocations){
+    public Journey(List<TransLocation> transLocations){
         this.translocations = transLocations;
     }
 
-    @Override
-    public List<ITransLocation> getTransLocations() {
+    public List<TransLocation> getTransLocations() {
         return this.translocations;
     }
     
-    public void setTranslocations(List<ITransLocation> translocations){
+    public void setTranslocations(List<TransLocation> translocations){
         this.translocations = translocations;
     }
     
@@ -62,5 +63,9 @@ public class Journey implements IJourney, Serializable {
     
     public Long getId(){
         return this.Id;
+    }
+    
+    public void setCartracker(String cartracker) {
+        this.cartracker = cartracker;
     }
 }
