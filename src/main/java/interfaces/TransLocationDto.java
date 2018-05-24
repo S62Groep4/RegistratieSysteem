@@ -33,7 +33,7 @@ public class TransLocationDto implements Serializable {
     public String getLon() {
         return lon;
     }
-
+                                                            
     public String getTimestamp() {
         return timestamp;
     }
