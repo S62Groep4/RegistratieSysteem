@@ -12,14 +12,16 @@ import domain.TransLocation;
 import interfaces.TransLocationDto;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.ejb.Singleton;
 
 @Stateless
+@Singleton
 public class JourneyService {
 
     @Inject
     JourneyDAO journeyDAO;
 
-    public static final List<Journey> activeJourneys = Collections.synchronizedList(new ArrayList<Journey>());
+    public final List<Journey> activeJourneys = Collections.synchronizedList(new ArrayList<Journey>());
 
     private static final Logger LOGGER = Logger.getLogger(JourneyService.class.getName());
 
@@ -72,10 +74,10 @@ public class JourneyService {
         }
     }
 
-    public static void addTransLocation(TransLocationDto transLocationDto) {
+    public void addTransLocation(TransLocationDto transLocationDto) {
         Journey currentJourney = null;
 
-        for (Journey j : activeJourneys) {
+        for (Journey j : this.activeJourneys) {
             if (j.getTransLocations() != null && j.getTransLocations().size() > 0) {
                 if (j.getTransLocations().get(0).getSerialNumber().equals(transLocationDto.getSerialNumber())) {
                     currentJourney = j;
@@ -98,7 +100,7 @@ public class JourneyService {
             Journey newJourney = new Journey(new ArrayList<TransLocation>());
             newJourney.getTransLocations().add(transLocation);
             transLocation.setJourney(newJourney);
-            JourneyService.activeJourneys.add(newJourney);
+            this.activeJourneys.add(newJourney);
         }
     }
 

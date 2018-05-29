@@ -25,11 +25,10 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author M
  */
-@Startup
+//@Startup
 @Singleton
 public class init {
 
-    @JPA
     @Inject
     VehicleDAO vehicleDAO;
     

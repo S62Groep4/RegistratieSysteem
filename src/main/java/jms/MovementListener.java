@@ -1,6 +1,5 @@
 package jms;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.rabbitmq.client.AMQP;
@@ -13,13 +12,17 @@ import java.util.concurrent.TimeoutException;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.inject.Inject;
 import service.JourneyService;
 
-@Startup
-@Singleton
+/*@Singleton
+@Startup*/
 public class MovementListener {
 
     private Gateway simulationToRegistration;
+
+    @Inject
+    private JourneyService journeyService;
 
     @PostConstruct
     public void init() {
@@ -32,20 +35,13 @@ public class MovementListener {
                 @Override
                 public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
                     System.out.println("Delivery: " + new String(body));
-                    TransLocationDto transLocationDto = null;
-                    try {
-                        transLocationDto = new Gson().fromJson(new String(body), TransLocationDto.class);
-                    } catch (JsonSyntaxException e) {
-                        System.out.println("Gson error: " + e.getMessage());
-                    }
-                    System.out.println("Objectmapper success");
-                    JourneyService.addTransLocation(transLocationDto);
+                    TransLocationDto transLocationDto = new Gson().fromJson(new String(body), TransLocationDto.class);
+                    System.out.println("Gson success");
+                    journeyService.addTransLocation(transLocationDto);
                 }
             };
             simulationToRegistration.channel.basicConsume("SimulationToGermany", true, consumer);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (TimeoutException ex) {
+        } catch (IOException | TimeoutException ex) {
             ex.printStackTrace();
         }
     }

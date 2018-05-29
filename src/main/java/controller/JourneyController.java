@@ -21,7 +21,7 @@ public class JourneyController implements Serializable {
     private JourneyService journeyService;
     
     public List<Journey> getActiveJourneys() {
-        return JourneyService.activeJourneys;
+        return journeyService.activeJourneys;
     }
     
     public void endJourney(String cartrackerId) {

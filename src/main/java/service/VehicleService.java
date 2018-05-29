@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
-import utildatagenerator.JPA;
 
 /**
  *
@@ -23,7 +22,6 @@ import utildatagenerator.JPA;
 public class VehicleService {
 
     @Inject
-    @JPA
     VehicleDAO vehicleDAO;
 
     private static final Logger LOGGER = Logger.getLogger(VehicleService.class.getName());
