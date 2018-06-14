@@ -15,8 +15,8 @@ import javax.ejb.Startup;
 import javax.inject.Inject;
 import service.JourneyService;
 
-/*@Singleton
-@Startup*/
+@Singleton
+@Startup
 public class MovementListener {
 
     private Gateway simulationToRegistration;
@@ -29,7 +29,7 @@ public class MovementListener {
         System.out.println("Movement Listener init");
         try {
             simulationToRegistration = new Gateway();
-            simulationToRegistration.channel.queueDeclare("SimulationToGermany", false, false, false, null);
+            simulationToRegistration.channel.queueDeclare("rekeningrijden.simulation.de", true, false, false, null);
 
             Consumer consumer = new DefaultConsumer(simulationToRegistration.channel) {
                 @Override
@@ -40,7 +40,7 @@ public class MovementListener {
                     journeyService.addTransLocation(transLocationDto);
                 }
             };
-            simulationToRegistration.channel.basicConsume("SimulationToGermany", true, consumer);
+            simulationToRegistration.channel.basicConsume("rekeningrijden.simulation.de", true, consumer);
         } catch (IOException | TimeoutException ex) {
             ex.printStackTrace();
         }
