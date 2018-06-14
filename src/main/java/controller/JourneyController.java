@@ -21,6 +21,7 @@ public class JourneyController implements Serializable {
     private JourneyService journeyService;
     
     public List<Journey> getActiveJourneys() {
+        System.out.println("get journeys " + journeyService.activeJourneys.size());
         return journeyService.activeJourneys;
     }
     

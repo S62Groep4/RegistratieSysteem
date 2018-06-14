@@ -38,6 +38,7 @@ public class MovementListener {
                     TransLocationDto transLocationDto = new Gson().fromJson(new String(body), TransLocationDto.class);
                     System.out.println("Gson success");
                     journeyService.addTransLocation(transLocationDto);
+                    System.out.println("journeyService success");
                 }
             };
             simulationToRegistration.channel.basicConsume("rekeningrijden.simulation.de", true, consumer);

@@ -15,7 +15,7 @@ and open the template in the editor.
     </h:head>
     <h:body>
         <h:form>
-            <p:dataTable var="activejourney" value="#{journeyController.activeJourneys}">
+            <p:dataTable id="journeys" var="activejourney" value="#{journeyController.activeJourneys}">
                 <p:column headerText="Id">
                     <h:outputText value="#{activejourney.id}" />
                 </p:column>
@@ -29,7 +29,7 @@ and open the template in the editor.
                 </p:column>
 
                 <p:column>
-                    <p:commandButton value="Save" id="save-journey" actionListener="#{journeyController.endJourney(activejourney.transLocations.get(activejourney.transLocations.size() - 1).serialNumber)}" styleClass="ui-priority-primary" />
+                    <p:commandButton update="journeys" value="Save" id="save-journey" actionListener="#{journeyController.endJourney(activejourney.transLocations.get(activejourney.transLocations.size() - 1).serialNumber)}" styleClass="ui-priority-primary" />
                 </p:column>
             </p:dataTable>
         </h:form>

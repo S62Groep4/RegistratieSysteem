@@ -4,21 +4,21 @@ import java.io.Serializable;
 
 public class TransLocationDto implements Serializable {
 
+    private Double lat;
+    private Double lon;
+    private String dateTime;
     private String serialNumber;
-    private String lat;
-    private String lon;
-    private String timestamp;
     private String countryCode; //Country the car is driving in
 
     public TransLocationDto() {
 
     }
 
-    public TransLocationDto(String serialNumber, String lat, String lon, String timestamp, String countryCode) {
+    public TransLocationDto(Double lat, Double lon, String dateTime, String serialNumber, String countryCode) {
         this.serialNumber = serialNumber;
         this.lat = lat;
         this.lon = lon;
-        this.timestamp = timestamp;
+        this.dateTime = dateTime;
         this.countryCode = countryCode;
     }
 
@@ -26,36 +26,36 @@ public class TransLocationDto implements Serializable {
         return serialNumber;
     }
 
-    public String getLat() {
-        return lat;
-    }
-
-    public String getLon() {
-        return lon;
-    }
-                                                            
-    public String getTimestamp() {
-        return timestamp;
-    }
-
-    public String getCountryCode() {
-        return countryCode;
-    }
-
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
     }
 
-    public void setLat(String lat) {
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
         this.lat = lat;
     }
 
-    public void setLon(String lon) {
+    public Double getLon() {
+        return lon;
+    }
+
+    public void setLon(Double lon) {
         this.lon = lon;
     }
 
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
     }
 
     public void setCountryCode(String countryCode) {

@@ -10,8 +10,10 @@ import javax.persistence.PersistenceException;
 import dao.JourneyDAO;
 import domain.TransLocation;
 import interfaces.TransLocationDto;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import javax.ejb.Singleton;
 
 @Stateless
@@ -21,7 +23,7 @@ public class JourneyService {
     @Inject
     JourneyDAO journeyDAO;
 
-    public final List<Journey> activeJourneys = Collections.synchronizedList(new ArrayList<Journey>());
+    public static final List<Journey> activeJourneys = Collections.synchronizedList(new ArrayList<Journey>());
 
     private static final Logger LOGGER = Logger.getLogger(JourneyService.class.getName());
 
@@ -88,9 +90,9 @@ public class JourneyService {
 
         TransLocation transLocation = new TransLocation();
         transLocation.setCountryCode(transLocationDto.getCountryCode());
-        transLocation.setDateTime(transLocationDto.getTimestamp());
-        transLocation.setLat(Double.parseDouble(transLocationDto.getLat()));
-        transLocation.setLon(Double.parseDouble(transLocationDto.getLon()));
+        transLocation.setDateTime(transLocationDto.getDateTime());
+        transLocation.setLat(transLocationDto.getLat());
+        transLocation.setLon(transLocationDto.getLon());
         transLocation.setSerialNumber(transLocationDto.getSerialNumber());
 
         if (currentJourney != null) {
@@ -102,6 +104,8 @@ public class JourneyService {
             transLocation.setJourney(newJourney);
             this.activeJourneys.add(newJourney);
         }
+        
+        System.out.println("Journeys: " + activeJourneys.size());
     }
 
     public void endJourney(String cartrackerId) {
