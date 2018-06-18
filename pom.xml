@@ -93,6 +93,17 @@
             <version>8.0</version>
             <scope>provided</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/net.reini/rabbitmq-cdi -->
+        <dependency>
+            <groupId>net.reini</groupId>
+            <artifactId>rabbitmq-cdi</artifactId>
+            <version>0.9.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>5.1.2</version>
+        </dependency>
     </dependencies>
 
     <build>
