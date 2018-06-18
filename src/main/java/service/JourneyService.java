@@ -1,20 +1,21 @@
 package service;
 
+import dao.JourneyDAO;
 import domain.Journey;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import domain.TransLocation;
+import interfaces.TransLocationDto;
+
+import javax.ejb.Singleton;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
-import dao.JourneyDAO;
-import domain.TransLocation;
-import interfaces.TransLocationDto;
-import java.time.LocalDate;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
-import javax.ejb.Singleton;
+import java.util.List;
+import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Stateless
 @Singleton
@@ -23,7 +24,13 @@ public class JourneyService {
     @Inject
     JourneyDAO journeyDAO;
 
+    @Inject
+    private StolenVehicleService stolenVehicleService;
+
+
     public static final List<Journey> activeJourneys = Collections.synchronizedList(new ArrayList<Journey>());
+
+    private static final List<String> stolenVehicles = Collections.synchronizedList(new ArrayList<String>());
 
     private static final Logger LOGGER = Logger.getLogger(JourneyService.class.getName());
 
@@ -104,7 +111,18 @@ public class JourneyService {
             transLocation.setJourney(newJourney);
             this.activeJourneys.add(newJourney);
         }
-        
+
+
+        if (stolenVehicles.contains(transLocation.getSerialNumber())) {
+            try {
+                stolenVehicleService.PublishLocation(transLocationDto);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (TimeoutException e) {
+                LOGGER.log(Level.FINE, "ERROR while performing publish stolen vehicle method; {0}", e.getMessage());
+            }
+        }
+
         System.out.println("Journeys: " + activeJourneys.size());
     }
 
@@ -124,5 +142,20 @@ public class JourneyService {
         journeyToEnd.setCartracker(journeyToEnd.getTransLocations().get(0).getSerialNumber());
 
         insertJourney(journeyToEnd);
+
     }
+
+    public void AddStolenVehicle(String id) {
+        if (!stolenVehicles.contains(id)) {
+            stolenVehicles.add(id);
+        }
+    }
+
+    public void removeAsStolenVehicle(String id) {
+        if (stolenVehicles.contains(id)) {
+            stolenVehicles.remove(id);
+        }
+    }
+
+
 }
